@@ -1,0 +1,21 @@
+@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+html, body{width: 100%;height: 100%;overflow: hidden;margin: 0;font-family: 'microsoft yahei';background-image:url(/img/paper-1100254.jpg);background-size: 100%;}
+html{_height: auto;_padding: 50px 0 0px;}
+
+.login{width:640px;height:400px;position:absolute;left:50%;top:50%;margin-left:-320px;margin-top:-200px;}
+.logo{padding-top:100px;padding-bottom:50px;text-align:center;color:#fff;padding-right:10px;font-size:40px;}
+.login_form{height:80px;margin-left:auto;margin-right:auto;width:600px;}
+.login_form .user{background-image:url(/img/111.png);width:535px;height:70px;float:left;border-radius: 6px;}
+.login_form .button{background:url(/img/222.png);width:45px;background-repeat:no-repeat;background-position:left center;height:45px;float:left;display:block;text-indent: -9999px;border:none;margin-top:10px;position:relative;border-radius: 8px;}
+.login_form .text_value{float:left;margin-left:20px;padding-left:9px;padding-right:16px;margin-top:11px;width:214px;height:50px;line-height:50px;font-size:16px;color:#666;font-weight:bold;border:none;background-color:#f5f6f7}
+.signup a1{color:#fff;padding-left:70px;padding-right:10px;font-size:15px;}
+.signup a2{color:#fff;padding-left:100px;padding-right:10px;font-size:15px;}
+#tip{padding-top:10px;color:#FFF;background-image:none;text-align:center;padding-right:80px;font-size:14px;}
+.password{color:#fff;padding-left:60px;padding-right:10px;font-size:15px;}
+
+.rememberme {
+    color: #fff;
+    text-align: center;
+}
