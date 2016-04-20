@@ -1,0 +1,13 @@
+1) Go into vagrant ssh
+
+2) mysql -u homestead -p
+
+The password is: secret
+
+3) use homestead;
+
+4) select * from patients;
+   select * from doctors;
+
+5) To change the doctor_id:
+     UPDATE patients SET doctor_id=.... WHERE lastname='<patient lastname>';
