@@ -369,6 +369,23 @@ header {
   text-align: center;
 }
 
+/* Patients area */
+#patientarea-tabs {
+	margin-bottom: 15px;
+}
+#patientarea table tr {
+	border-bottom: 1px solid #ddd;
+}
+#patientarea table tr td {
+	padding: 10px 10px 10px 20px;
+}
+#patientarea table tr:first-child td {
+	border-top: 0; /* no top border on first row */
+}
+#patientarea table tr td:first-child {
+	text-align: right; /* right align the table labels */
+}
+
 /* Profile page */
 #tab-profile h2 > img {
 	border-radius: 1.75em;

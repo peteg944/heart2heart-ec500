@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Doctor;
+use App\Patient;
 
 class DoctorRepository
 {
@@ -25,6 +26,18 @@ class DoctorRepository
         }
 
         return $docs;
+    }
+
+    /**
+     * Get the doctor for the given patient.
+     * @param Patient $patient
+     * @return Doctor
+     */
+    public function forPatient(Patient $patient)
+    {
+        // Get the doc
+        return Doctor::where('id', $patient->doctor_id)
+                    ->first();
     }
 }
 ?>

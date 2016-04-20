@@ -47,8 +47,23 @@ class PatientController extends Controller
                 ]);
 
         $data = array(
-            'patient' => $this->patients->forUser($request->user()),
-            'doctors' => $this->doctors->shortNames(),
+            'patient' => $request->user()->subuser,
+            'mydoctor' => $this->doctors->forPatient($request->user()->subuser),
+            'alldoctors' => $this->doctors->shortNames(),
+            'months' => array(
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+                ),
             );
         
         return view('patients.index', $data);
