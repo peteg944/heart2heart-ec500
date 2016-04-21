@@ -12,7 +12,9 @@
             <tr><td>Home address:</td><td>{{ $patient->address }}</td></tr>
         </table>
         <h3>Your Doctor</h3>
-        <p>{{ $mydoctor->firstname.' '.$mydoctor->lastname }}</p>
+        @if(isset($mydoctor))
+        	<p>{{ $mydoctor->firstname.' '.$mydoctor->lastname }}</p>
+    	@endif
     </div>
     <div class="col-md-6 col-s-6 col-xs-12">
         <h1>Your Cardiac MRIs</h1>
