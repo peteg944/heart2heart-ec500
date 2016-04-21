@@ -33,6 +33,7 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
+        // If you are a patient then you cannot see this page
         if($request->user()->subuser_type == "App\\Patient")
             return view('usertypeError', [
                 'correct_type' => 'doctor',
@@ -50,16 +51,24 @@ class DoctorController extends Controller
      * @param int $patient_id
      * @return Response
      */
-    public function show(Request $request, $patient)
+    public function show(Request $request, $patient_id)
     {
+        // If you are a patient then you cannot see this page
         if($request->user()->subuser_type == "App\\Patient")
             return view('usertypeError', [
                 'correct_type' => 'doctor',
                 ]);
 
+        // Get the patient with this ID
+        $this_patient = $this->patients->withID($patient_id);
+
+        // Make sure this is your patient
+        if($this_patient->doctor_id != $request->user()->subuser->id)
+            return view('doctors.notyourpatient');
+
         $data = array(
             'patients' => $this->patients->forDoctor($request->user()->subuser), // List of patients
-            'selected' => $this->patients->withID($patient),
+            'selected' => $this->patients->withID($patient_id),
             'months' => array(
                 'January',
                 'February',
