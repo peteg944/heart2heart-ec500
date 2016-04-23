@@ -23,6 +23,7 @@ Route::get('introduction', function () {
 Route::get('doctor', 'DoctorController@index');
 
     Route::get('doctor/getpatient/{patient}', 'DoctorController@show');
+    Route::post('doctor/uploaddicom/{patient}', 'DicomController@upload');
 
     //Route::get('doctor/addpatient', 'DoctorController@getStore');
     //Route::post('doctor/addpatient', 'DoctorController@postStore');

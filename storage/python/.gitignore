@@ -1,0 +1,4 @@
+*
+!.gitignore
+!segment.py
+!accuracy.csv

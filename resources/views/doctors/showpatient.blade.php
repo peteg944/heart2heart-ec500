@@ -15,7 +15,8 @@
 <div class="row"><!-- upload file -->
     <div class="col-xs-12 col-s-6 col-md-6">
         <h4>Upload a DICOM file</h4>
-        <form action="upload.php" enctype="multipart/form-data" class="dropzone" id="zipfileUpload">
+        <form action="{{ url('/doctor/uploaddicom/'.$selected->id) }}" enctype="multipart/form-data" method="POST" class="dropzone" id="zipfileUpload">
+            {!! csrf_field() !!}
         </form>
     </div>
 </div>
@@ -31,10 +32,7 @@
             acceptedFiles: "application/zip",
             init: function() {
                 this.on("success", function(e, response) {
-                    // Hide the image uploader and show the progress thing
-                    zipfileUpload.style.display = "none";
-                    progressMessage.style.display = "inline";
-                    loadImage(response);
+                    
                 });
                 
                 this.on("dragover", function(e) {
@@ -43,7 +41,7 @@
                 
                 this.on("dragleave", function(e) {
                     zipfileUpload.style.backgroundColor = "#fff";
-                })
+                });
             }
         };
     </script>
