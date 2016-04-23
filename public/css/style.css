@@ -103,6 +103,16 @@ header {
 	margin-top: -20px;
 /* 	margin-bottom: 0; */
 }
+#jumbotron-aboutpage1 {
+	background-image: url(/img/medical-blur.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: -20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+/* 	margin-bottom: 0; */
+}
 
 .container-fluid > .container {
 	margin-bottom: 20px;
@@ -484,4 +494,20 @@ header {
 }
 .dragfile{
 	padding-right:70px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: center;
+    padding-left: 400px;
+    padding-right: 400px;
+}
+.form-control {
+    border: 1px solid #eee;
+    box-shadow: none;
+}
+.form-group1 {
+    margin-bottom: 15px;
+    padding-left: 620px;
+    padding-right: 300px;
 }
