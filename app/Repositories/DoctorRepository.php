@@ -28,6 +28,11 @@ class DoctorRepository
         return $docs;
     }
 
+    public function doctorID($doctor_id)
+    {
+        return Doctor::where('id', $doctor_id)
+                    ->first();
+    }
     /**
      * Get the doctor for the given patient.
      * @param Patient $patient

@@ -10,7 +10,7 @@
             </a>
         </li>
         <li @yield('tabactive-contactdoctor') role="presentation">
-            <a href="indexdoctor">
+            <a href="patient/">
                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact A Doctor
             </a>
         </li>
@@ -29,5 +29,4 @@
         @yield('content_patient')
     </div>
 </div>
-
 @endsection

@@ -35,7 +35,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/doctor">Doctors</a></li>
                     <li><a href="/patient">Patients</a></li>
-                    <li><a href="/public.php">Public</a></li>
+                    <li><a href="/public">Public</a></li>
                     <li><a href="/introduction">About Us</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

@@ -33,6 +33,19 @@ Route::get('doctor', 'DoctorController@index');
 
 // Patients
 Route::get('patient', 'PatientController@index');
+	Route::get('patient/introduction', function () {
+        return view('patients/introduction');
+    });
+    Route::get('patient/contactus', function () {
+        return view('patients/contact us');
+    });
+Route::get('indexdoctor', 'PatientController@indexdoctor');
+Route::get('patient/getdoctor/{doctor}', 'PatientController@show');
+    
+// Public
+Route::get('public', function () {
+    return view('public1/index');
+});
 
 // Login, registering routes
 Route::get('login', 'Auth\AuthController@getLogin');

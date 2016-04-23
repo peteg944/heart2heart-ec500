@@ -371,7 +371,6 @@ header {
 
 /* Patients area */
 #patientarea-tabs {
-	margin-bottom: 15px;
 }
 #patientarea table tr {
 	border-bottom: 1px solid #ddd;
@@ -482,4 +481,7 @@ header {
 }
 .linkcolor{
 	color:#DC4D4D
+}
+.dragfile{
+	padding-right:70px;
 }

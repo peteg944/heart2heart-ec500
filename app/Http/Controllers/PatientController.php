@@ -68,4 +68,45 @@ class PatientController extends Controller
         
         return view('patients.index', $data);
     }
+    
+   
+       /**
+     * Get list of doctors
+     * @param Request $request
+     * @return Request
+     */
+    public function indexdoctor(Request $request)
+    {
+        if($request->user()->subuser_type == "App\\Doctor")
+            return view('usertypeError', [
+                'correct_type' => 'patient',
+                ]);
+
+        $data = array(
+            'doctors' => $this->doctors->shortNames(),
+            );
+        
+        return view('patients.contact', $data);
+    }
+
+    /**
+     * Get a certain doctor
+     * @param int $doctor_id
+     * @return Response
+     */
+public function show(Request $request, $doctor_id)
+    {
+        if($request->user()->subuser_type == "App\\Doctor")
+            return view('usertypeError', [
+                'correct_type' => 'patient',
+                ]);
+
+		$this_doctor = $this->patients->doctorID($doctor_id);
+		        $data = array(
+            'doctors' => $this->doctors->shortNames($request->user()->subuser),
+            'selected' => $this->doctors->doctorID($doctor_id),
+            );
+        return view('patients.showdoctor', $data);
+    }
+    
 }

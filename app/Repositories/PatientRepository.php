@@ -33,6 +33,12 @@ class PatientRepository
         return Patient::where('id', $patient_id)
                     ->first();
     }
+    
+        public function doctorID($doctor_id)
+    {
+        return Doctor::where('id', $doctor_id)
+                    ->first();
+    }
 
     /**
      * Get the patient associated with a given user.
