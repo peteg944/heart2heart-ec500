@@ -33,7 +33,7 @@
                 <!-- patient info -->
                 <div class="col-xs-12 col-s-9 col-md-9">
                     <div class="patient">
-                        @yield('content_patient')
+						<h3 class="action-message"><span class="glyphicon glyphicon-hand-left"></span>&nbsp;Select the doctor you want to contact</h3>
                     </div>
                 </div> <!-- patient info -->
             </div> <!-- end row -->
