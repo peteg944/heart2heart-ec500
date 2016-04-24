@@ -49,7 +49,7 @@ class DicomController extends Controller
         // Get the file and python folder
         $file = $request->file('zipfile');
         $python_folder = storage_path('app/python');
-        Log::info("Python folder is: $python_folder");
+        //Log::info("Python folder is: $python_folder");
 
         // Validate it
         $rules = array(
@@ -136,7 +136,7 @@ class DicomController extends Controller
         );
 
         $files = Storage::allFiles(basename($python_folder));
-        Log::info("Found # of files: ".count($files));
+        //Log::info("Found # of files: ".count($files));
         foreach($files as $file)
         {
             //Log::info("Found file: $file");
@@ -171,9 +171,10 @@ class DicomController extends Controller
      */
     public function delete(Request $request, $patient_id)
     {
-        $this_patient = $this->patients->withID($patient_id);
+        $deleted_dicoms = $this->dicoms->deleteForPatient($this->patients->withID($patient_id));
+        Log::info("Count of dicoms: ".count($deleted_dicoms));
 
-        if($this->dicoms->deleteForPatient($this_patient) === TRUE) // Successful
+        if(count($deleted_dicoms) > 0) // Successful
         {
             return Response::json([
                 'message' => 'The data was successfully deleted.',

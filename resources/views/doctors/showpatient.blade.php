@@ -19,6 +19,7 @@
             <p>EF: {{ $dicom_data->ef }}</p>
             <p>Predicted diastolic volume: {{ $dicom_data->predicted_edv }}</p>
             <p>Predicted systolic volume: {{ $dicom_data->predicted_esv }}</p>
+            <a href="{{ url('/deletedicom/'.$selected->id) }}" id="delete-dicom-link">Delete this entry</a>
         @else
             <h4>Upload a DICOM file</h4>
             <form action="{{ url('/uploaddicom/'.$selected->id) }}" enctype="multipart/form-data" method="POST" class="dropzone" id="zipfileUpload">
@@ -31,7 +32,12 @@
 
 @section('content_bottom')
 <script src="/js/dropzone.js"></script>
-<script>        
+<script>   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
     // Dropzone
     Dropzone.options.zipfileUpload = {
         paramName: "zipfile",
@@ -52,5 +58,17 @@
             });
         }
     };
+
+    $("#delete-dicom-link").click(function(event) {
+        event.preventDefault(); // do not actually go to the link
+        $.ajax({
+            type: "DELETE",
+            url: $(this).attr('href'),
+        })
+        .done(function(jsonResult) {
+            //alert(jsonResult.message);
+            location.reload(true);
+        });
+    });
 </script>
 @endsection('content_bottom')
