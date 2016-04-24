@@ -8,9 +8,13 @@ use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests;
+
+use App\Patient;
 use App\Repositories\DicomRepository;
+use App\Repositories\PatientRepository;
 
 class DicomController extends Controller
 {
@@ -20,12 +24,18 @@ class DicomController extends Controller
     private $dicoms;
 
     /**
+     * Patient repository
+     */
+    private $patients;
+
+    /**
      * Create a new controller instance.
      */
-    public function __construct(DicomRepository $dicom_repo)
+    public function __construct(DicomRepository $dicom_repo, PatientRepository $patient_repo)
     {
         $this->middleware('auth');
         $this->dicoms = $dicom_repo;
+        $this->patients = $patient_repo;
     }
 
     /**
@@ -38,7 +48,8 @@ class DicomController extends Controller
     {
         // Get the file and python folder
         $file = $request->file('zipfile');
-        $python_folder = storage_path() . '/python/';
+        $python_folder = storage_path('app/python');
+        Log::info("Python folder is: $python_folder");
 
         // Validate it
         $rules = array(
@@ -48,8 +59,7 @@ class DicomController extends Controller
         if($validation->fails())
         {
             return Response::json([
-                'error' => true,
-                'message' => $validation->errors->first(),
+                'error' => $validation->errors->first(),
                 'code' => 400,
             ], 400); // HTTP 400 error
         }
@@ -61,7 +71,7 @@ class DicomController extends Controller
 
         // Unzip the file
         $zip = new ZipArchive;
-        if($zip->open($python_folder . $newname_with_extension) !== TRUE)
+        if($zip->open($python_folder . '/' . $newname_with_extension) !== TRUE)
         {
             // There was an error in unzipping the file
             return Response::json([
@@ -77,10 +87,9 @@ class DicomController extends Controller
         // Run the python program
         //exec('source ~/.bashrc');
         //$output = exec('python ' . $python_folder . 'segment.py'); // execute
-        sleep(2);
 
         // Now there should be an accuracy.csv file
-        if(!file_exists($python_folder . 'accuracy.csv'))
+        if(!file_exists($python_folder . '/accuracy.csv'))
         {
             // There was an error in opening the csv file
             return Response::json([
@@ -89,7 +98,7 @@ class DicomController extends Controller
             ], 400);
         }
         
-        $csv_file = fopen($python_folder . 'accuracy.csv', 'r');
+        $csv_file = fopen($python_folder . '/accuracy.csv', 'r');
 
         // Parse the second line of csv file and get turn into doubles
         fgets($csv_file); // get the first line (this is not data)
@@ -116,12 +125,67 @@ class DicomController extends Controller
         );
 
         // Create dicom object
-        $created_dicom = $this->dicoms->create($ef_data, $patient_id);
+        $created_dicom = $this->dicoms->create($ef_data, $this->patients->withID($patient_id));
+
+        // Delete files that are unnecessary
+        $keep_files = array(
+            '.gitignore',
+            'accuracy.csv',
+            'segment.py',
+            'train.csv',
+        );
+
+        $files = Storage::allFiles(basename($python_folder));
+        Log::info("Found # of files: ".count($files));
+        foreach($files as $file)
+        {
+            //Log::info("Found file: $file");
+
+            if(!in_array(basename($file), $keep_files))
+            {
+                if(is_dir($file))
+                {
+                    Storage::deleteDirectory($file);
+                    //Log::info("Deleted folder: $file");
+                }
+                else
+                {
+                    Storage::delete($file);
+                    //Log::info("Deleted file: $file");
+                }
+            }
+        }
 
         // return success
         return Response::json([
             'message' => 'The file upload was successful!',
             'code' => 200,
         ], 200); // http 200 success
+    }
+
+    /**
+     * Deletes the Dicom entry for a given patient
+     * @param Request $request
+     * @param int $patient_id
+     * @return Response
+     */
+    public function delete(Request $request, $patient_id)
+    {
+        $this_patient = $this->patients->withID($patient_id);
+
+        if($this->dicoms->deleteForPatient($this_patient) === TRUE) // Successful
+        {
+            return Response::json([
+                'message' => 'The data was successfully deleted.',
+                'code' => 200,
+            ], 200);
+        }
+        else // Error
+        {
+            return Response::json([
+                'message' => 'There was an error in deleting the data.',
+                'code' => 400,
+            ], 400);
+        }
     }
 }

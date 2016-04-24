@@ -42,8 +42,9 @@ Route::get('patient', 'PatientController@index');
 Route::get('indexdoctor', 'PatientController@indexdoctor');
 Route::get('patient/getdoctor/{doctor}', 'PatientController@show');
 
-// Uploading dicom files
+// Managing dicom files
 Route::post('uploaddicom/{patient}', 'DicomController@upload');
+Route::post('deletedicom/{patient}', 'DicomController@delete');
     
 // Public
 Route::get('public', function () {
