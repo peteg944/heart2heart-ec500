@@ -30,4 +30,11 @@ class Patient extends Model
         return $this->belongsTo('App\Doctor');
     }
     
+    /**
+     * Get this patient's dicom data
+     */
+    public function dicom()
+    {
+        return $this->hasOne('App\Dicom');
+    }
 }

@@ -23,7 +23,6 @@ Route::get('introduction', function () {
 Route::get('doctor', 'DoctorController@index');
 
     Route::get('doctor/getpatient/{patient}', 'DoctorController@show');
-    Route::post('doctor/uploaddicom/{patient}', 'DicomController@upload');
 
     //Route::get('doctor/addpatient', 'DoctorController@getStore');
     //Route::post('doctor/addpatient', 'DoctorController@postStore');
@@ -42,6 +41,9 @@ Route::get('patient', 'PatientController@index');
     });
 Route::get('indexdoctor', 'PatientController@indexdoctor');
 Route::get('patient/getdoctor/{doctor}', 'PatientController@show');
+
+// Uploading dicom files
+Route::post('uploaddicom/{patient}', 'DicomController@upload');
     
 // Public
 Route::get('public', function () {

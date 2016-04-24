@@ -63,12 +63,12 @@ class DoctorController extends Controller
         $this_patient = $this->patients->withID($patient_id);
 
         // Make sure this is your patient
-        if($this_patient->doctor_id != $request->user()->subuser->id)
+        if($this_patient->doctor->id != $request->user()->subuser->id)
             return view('doctors.notyourpatient');
 
         $data = array(
             'patients' => $this->patients->forDoctor($request->user()->subuser), // List of patients
-            'selected' => $this->patients->withID($patient_id),
+            'selected' => $this_patient,
             'months' => array(
                 'January',
                 'February',
@@ -83,6 +83,7 @@ class DoctorController extends Controller
                 'November',
                 'December'
                 ),
+            'dicom_data' => $this_patient->dicom,
             );
 
         return view('doctors.showpatient', $data);
