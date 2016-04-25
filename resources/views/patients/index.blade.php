@@ -3,7 +3,7 @@
 @section('tabactive-profile', 'class="active"')
 @section('content_patient')
 <div class="row">
-    <div class="col-md-6 col-s-6 col-xs-12">
+    <div class="col-md-61">
         <h1>{{ $patient->firstname.' '.$patient->lastname }}</h1>
         <table>
             <tr><td>Date of birth:</td><td>{{ $months[$patient->dob_month].' '.$patient->dob_day.', '.$patient->dob_year }}</td></tr>
@@ -16,6 +16,7 @@
         	<p>{{ $mydoctor->firstname.' '.$mydoctor->lastname }}</p>
     	@endif
     </div>
+    <div><img class="patientfileimg" src="/img/person-placeholder.png"></div>
     <div class="col-md-6 col-s-6 col-xs-12">
         <h1>Your Cardiac MRIs</h1>
     </div>

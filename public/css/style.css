@@ -408,13 +408,6 @@ header {
 .row1{
     margin-left:60px;
 }
-.col-xs-121{
-    width:23.8%;
-    margin-left:70px;
-}
-.col-xs-122{
-    width:60%;
-}
 .linktootherwebsite{
 	font-size: 20px;
 }
@@ -506,8 +499,51 @@ header {
     border: 1px solid #eee;
     box-shadow: none;
 }
+.form-control1 {
+    border: 1px solid #eee;
+    box-shadow: none;
+}
 .form-group1 {
     margin-bottom: 15px;
     padding-left: 620px;
     padding-right: 300px;
+}
+.col-xs-121{
+	width: 26.7%;
+	position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+}
+.col-xs-122{
+	width: 25%;
+	position: relative;
+    min-height: 1px;
+    padding-right: 11px;
+    float: left;
+}
+.col-xs-111{
+	position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 60%;
+    float: left;
+    }
+.col-md-61{
+	position: relative;
+	width: 25%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    text-align: center;
+    }
+.patientfileimg{
+    max-width: 150px;
+    float: left;
+    margin-top: 60px;
+    margin-left: 50px;
+    margin-right: 80px;
 }

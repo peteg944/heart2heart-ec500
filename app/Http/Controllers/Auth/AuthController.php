@@ -79,6 +79,8 @@ class AuthController extends Controller
             'phone' => 'required|max:20',
             'address' => 'required|max:255',
             'gender' => 'required|max:10',
+            'age' => 'required|numeric|min:0|max:120',
+            'state' => 'required|max:10',
         ]);
     }
 
@@ -128,6 +130,8 @@ class AuthController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
             'gender' => $data['gender'],
+            'age' => $data['age'],
+            'state' => $data['state'],
         ]);
 
         return User::create([

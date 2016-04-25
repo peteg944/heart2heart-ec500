@@ -10,7 +10,7 @@ class Patient extends Model
      * mass assignable attributes
      */
     protected $fillable = [
-        'firstname','lastname','dob_month','dob_day','dob_year','phone','address','gender'
+        'firstname','lastname','dob_month','dob_day','dob_year','phone','address','gender','age','state',
     ];
 
     /**

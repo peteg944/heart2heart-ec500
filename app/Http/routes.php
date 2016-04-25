@@ -50,6 +50,7 @@ Route::delete('deletedicom/{patient}', 'DicomController@delete');
 Route::get('public', function () {
     return view('public1/index');
 });
+Route::post('public/search', 'PatientController@publicsearch');
 
 // Login, registering routes
 Route::get('login', 'Auth\AuthController@getLogin');

@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests;
 use App\Repositories\PatientRepository;
 use App\Repositories\DoctorRepository;
+use App\User;
+use App\Doctor;
+use App\Patient;
 
 class PatientController extends Controller
 {
@@ -109,4 +115,16 @@ public function show(Request $request, $doctor_id)
         return view('patients.showdoctor', $data);
     }
     
+    /*public searching*/
+    public function publicsearch(Request $request)
+    {
+    	$data = array(
+    	'patients' => $this->patients->search1($request->user()->subuser),
+    	);
+        return view('public1.search', $data);
+    }
+
+    
 }
+
+

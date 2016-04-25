@@ -50,4 +50,18 @@ class PatientRepository
         return Patient::where('id', $user->subuser->id)
                     ->first();
     }
+    
+    public function search1(Patient $patient)
+    {
+        return Patient::where(function ($query) 
+            		{
+                	$query->where('state', '=', $state)
+                    	  ->where('gender', '=', $gender)
+                      	  ->where('age', [$age,$age+10]);
+            		})
+            		->select('firstname','lastname')
+            		->get();
+
+    }
 }
+
