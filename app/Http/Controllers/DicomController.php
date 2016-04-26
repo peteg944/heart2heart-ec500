@@ -86,8 +86,11 @@ class DicomController extends Controller
 
         // Run the python program
         //exec('source ~/.bashrc');
-        //$output = exec('python ' . $python_folder . 'segment.py'); // execute
-
+	chdir('../storage/app/python');
+	Log::info("Current dir: ".shell_exec('pwd'));
+        $output = shell_exec("/usr/bin/python $python_folder/segment.py 2>&1"); // execute
+	Log::info("Python output: $output");
+	
         // Now there should be an accuracy.csv file
         if(!file_exists($python_folder . '/accuracy.csv'))
         {
@@ -130,7 +133,6 @@ class DicomController extends Controller
         // Delete files that are unnecessary
         $keep_files = array(
             '.gitignore',
-            'accuracy.csv',
             'segment.py',
             'train.csv',
         );
@@ -155,6 +157,10 @@ class DicomController extends Controller
                 }
             }
         }
+
+	shell_exec('rm -rf train output');
+	//shell_exec('rm accuracy.csv');
+	//shell_exec('rm *.zip');
 
         // return success
         return Response::json([
