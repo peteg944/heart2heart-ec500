@@ -70,6 +70,7 @@ class PatientController extends Controller
                 'November',
                 'December'
                 ),
+            'dicom_data' => $request->user()->subuser->dicom,
             );
         
         return view('patients.index', $data);
@@ -100,7 +101,7 @@ class PatientController extends Controller
      * @param int $doctor_id
      * @return Response
      */
-public function show(Request $request, $doctor_id)
+public function showdoctor(Request $request, $doctor_id)
     {
         if($request->user()->subuser_type == "App\\Doctor")
             return view('usertypeError', [
@@ -113,6 +114,25 @@ public function show(Request $request, $doctor_id)
             'selected' => $this->doctors->doctorID($doctor_id),
             );
         return view('patients.showdoctor', $data);
+    }
+
+    /**
+     * Set this patient's doctor to this doctor
+     * @param int $doctor_id
+     * @return Response
+     */
+    public function setDoctor(Request $request, $doctor_id)
+    {
+        if($request->user()->subuser_type == "App\\Doctor")
+            return view('usertypeError', ['correct_type' => 'patient']);
+
+        // Set the new doctor ID
+        $this_patient = $request->user()->subuser;
+        $this_patient->doctor_id = $doctor_id;
+        $this_patient->save();
+
+        // Go back to patient
+        return redirect('patient');
     }
     
     /*public searching*/

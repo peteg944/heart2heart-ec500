@@ -9,7 +9,7 @@
                         @if(count($doctors) > 0)
                             @if(isset($selected))
                                 @foreach($doctors as $doctor)
-                                    <a class="list-group-item {{ ($doctor->id == $doctor->id) ? "active" : "" }}" href="{{ url('/patient/getdoctor/'.$doctor->id) }}">
+                                    <a class="list-group-item {{ ($doctor->id == $selected->id) ? "active" : "" }}" href="{{ url('/patient/getdoctor/'.$doctor->id) }}">
                                         <h4>{{ $doctor->lastname.', '.$doctor->firstname }}</h4>
                                     </a>
                                @endforeach
@@ -33,7 +33,7 @@
         					<table class="table">
             					<tr><td>Phone number:</td><td>{{ $selected->phone }}</td></tr>
             					<tr><td>Hospital:</td><td>{{ $selected->hospital }}</td></tr>
-            					<tr><td>Interest:</td><td>{{ $selected->interest }}</td></tr>
+            					<tr><td>Interest:</td><td>{{ $selected->interests }}</td></tr>
             					<tr><td>Education:</td><td>{{ $selected->education }}</td></tr>
         					</table>
     					</div>
@@ -43,9 +43,10 @@
 			</div>
 		</div>
 					<div class="text-center">
-						<a>
-							<button class="btn btn-primary" type="button"><span class="
-glyphicon glyphicon-envelope"></span>&nbsp;Choose This Doctor</button>
+						<a href="{{ url('/patient/setdoctor/'.$selected->id) }}">
+							<button class="btn btn-primary" type="button">
+                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;Choose This Doctor
+                            </button>
 						</a>
 					</div>
 

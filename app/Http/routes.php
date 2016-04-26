@@ -39,8 +39,9 @@ Route::get('patient', 'PatientController@index');
     Route::get('patient/contactus', function () {
         return view('patients/contact us');
     });
-Route::get('indexdoctor', 'PatientController@indexdoctor');
-Route::get('patient/getdoctor/{doctor}', 'PatientController@show');
+Route::get('patient/indexdoctor', 'PatientController@indexdoctor');
+Route::get('patient/getdoctor/{doctor}', 'PatientController@showdoctor');
+Route::get('patient/setdoctor/{doctor}', 'PatientController@setDoctor');
 
 // Managing dicom files
 Route::post('uploaddicom/{patient}', 'DicomController@upload');
