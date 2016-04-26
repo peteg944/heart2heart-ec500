@@ -27,9 +27,7 @@ Route::get('doctor', 'DoctorController@index');
     //Route::get('doctor/addpatient', 'DoctorController@getStore');
     //Route::post('doctor/addpatient', 'DoctorController@postStore');
 
-    Route::get('doctor/myprofile', function () {
-        return view('doctors/myprofile');
-    });
+    Route::get('doctor/myprofile', 'DoctorController@myProfile');
 
 // Patients
 Route::get('patient', 'PatientController@index');

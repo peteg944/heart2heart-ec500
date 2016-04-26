@@ -90,6 +90,19 @@ class DoctorController extends Controller
     }
 
     /**
+     * Get this doctor's profile
+     * @return Response
+     */
+    public function myProfile(Request $request)
+    {
+        $data = array(
+            'doctor' => $request->user()->subuser,
+        );
+        
+        return view('doctors.myprofile', $data);
+    }
+
+    /**
      * Get the 'Add Patient' page
      * @param Request $request
      * @return Response
