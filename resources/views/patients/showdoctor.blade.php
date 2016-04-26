@@ -4,7 +4,7 @@
 <div class="container">
 	<div id="tab-patients">
             <div class="row">
-                <div class="col-xs-12 col-s-3 col-md-3">
+                <div class="col-xs-122">
                     <div class="list-group">
                         @if(count($doctors) > 0)
                             @if(isset($selected))
@@ -45,7 +45,7 @@
 					<div class="text-center">
 						<a>
 							<button class="btn btn-primary" type="button"><span class="
-glyphicon glyphicon-envelope"></span>&nbsp;Contact The Doctor</button>
+glyphicon glyphicon-envelope"></span>&nbsp;Choose This Doctor</button>
 						</a>
 					</div>
 

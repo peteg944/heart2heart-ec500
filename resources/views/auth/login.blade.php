@@ -5,6 +5,7 @@
     <link href="/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+        <img class="logo1" src="/img/heart.png">
     <div class="login">
         <form action="{{ url('/login') }}" method="POST" id="form">
             {!! csrf_field() !!}

@@ -4,7 +4,7 @@
 @section('content_patient')
 <div id="tab-patients">
             <div class="row">
-                <div class="col-xs-12 col-s-3 col-md-3">
+                <div class="col-xs-121">
                     <div class="list-group">
                         @if(count($doctors) > 0)
                             @if(isset($selected))
@@ -31,7 +31,7 @@
                     </div> -->
                 </div>
                 <!-- patient info -->
-                <div class="col-xs-12 col-s-9 col-md-9">
+                <div class="col-xs-111">
                     <div class="patient">
 						<h3 class="action-message"><span class="glyphicon glyphicon-hand-left"></span>&nbsp;Select the doctor you want to contact</h3>
                     </div>

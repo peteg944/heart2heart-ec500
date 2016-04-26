@@ -11,3 +11,12 @@ The password is: secret
 
 5) To change the doctor_id:
      UPDATE patients SET doctor_id=.... WHERE lastname='<patient lastname>';
+
+vagrant@homestead:~$ ls
+composer.json  h2h
+vagrant@homestead:~$ cd h2h
+vagrant@homestead:~/h2h$ php artisan make:migration modify_patients_table
+Created Migration: 2016_04_23_163602_modify_patients_table
+vagrant@homestead:~/h2h$ 
+vagrant@homestead:~/h2h$ 
+vagrant@homestead:~/h2h$ php artisan migrate
