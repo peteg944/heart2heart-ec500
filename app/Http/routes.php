@@ -39,7 +39,7 @@ Route::get('patient', 'PatientController@index');
     });
 
 Route::get('indexdoctor', 'PatientController@indexdoctor');
-Route::get('patient/getdoctor/{doctor}', 'PatientController@show');
+Route::get('patient/getdoctor/{doctor}', 'PatientController@showdoctor');
 Route::get('patient/choosedoctor/{doctor}', 'PatientController@choosedoctor');
 
 // Managing dicom files

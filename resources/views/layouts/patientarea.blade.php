@@ -10,7 +10,7 @@
             </a>
         </li>
         <li @yield('tabactive-contactdoctor') role="presentation">
-            <a href="/patient/indexdoctor">
+            <a href="/indexdoctor">
                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact A Doctor
             </a>
         </li>
