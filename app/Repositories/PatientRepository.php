@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\User;
 use App\Doctor;
 use App\Patient;
+use App\Dicom;
 
 class PatientRepository
 {
@@ -39,6 +40,7 @@ class PatientRepository
         return Doctor::where('id', $doctor_id)
                     ->first();
     }
+    
 
     /**
      * Get the patient associated with a given user.
@@ -51,17 +53,22 @@ class PatientRepository
                     ->first();
     }
     
-    public function search1(Patient $patient)
+    public function search1($state,$age,$gender)
     {
-        return Patient::where(function ($query) 
-            		{
-                	$query->where('state', '=', $state)
+        $docs = Patient::where('state', '=', $state)
                     	  ->where('gender', '=', $gender)
-                      	  ->where('age', [$age,$age+10]);
-            		})
-            		->select('firstname','lastname')
+                      	  //->where('age', [intval($age),intval($age)+10])//;
+            		//})
+            		->select('id','lastname','firstname')
             		->get();
 
+        return $docs;
+
+    }
+        public function changedoctor($patient_id, $doctor_id)
+    {
+        return Patient::where('id', $patient_id)
+          		->update(['doctor_id' => $doctor_id]);
     }
 }
 

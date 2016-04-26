@@ -38,12 +38,25 @@ class DoctorController extends Controller
             return view('usertypeError', [
                 'correct_type' => 'doctor',
                 ]);
-
         $data = array(
             'patients' => $this->patients->forDoctor($request->user()->subuser),
             );
         
         return view('doctors.indexpatients', $data);
+    }
+
+    public function myprofile(Request $request)
+    {
+        // If you are a patient then you cannot see this page
+        if($request->user()->subuser_type == "App\\Patient")
+            return view('usertypeError', [
+                'correct_type' => 'doctor',
+                ]);
+        $data = array(
+            'doctor' => $request->user()->subuser,
+            );
+        
+        return view('doctors.myprofile', $data);
     }
 
     /**

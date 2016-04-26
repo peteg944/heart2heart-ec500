@@ -24,6 +24,7 @@ class DicomRepository
         ]);
     }
 
+
     /**
      * Delete the Dicom object of this patient
      * @param Patient $patient
@@ -32,5 +33,17 @@ class DicomRepository
     {
         return Dicom::where('patient_id', $patient->id)
                     ->delete();
+    }
+    public function dicomID($patients)
+    {
+		foreach($patients as $patient)
+        {
+        	$dicoms = Dicom::where('patient_id', $patient['id'])
+        			->select('ef','actual_edv','actual_esv','patient_id')
+                    ->get();
+
+        }
+
+        return $dicoms;
     }
 }

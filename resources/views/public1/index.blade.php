@@ -13,16 +13,17 @@
     </div>
 </div>
 <form class="search" action="{{ url('/public/search') }}" method="POST">
+								{!! csrf_field() !!}
 								<div class="form-group1">
 									<label>Gender</label>
 									<div class="radio">
 										<label>
-											<input type="radio" name="age" id="age" value="Male" checked>Male
+											<input type="radio" name="gender" id="gender" value="Male" checked>Male
 										</label>
 									</div>
 									<div class="radio">
 										<label>
-											<input type="radio" name="age" id="age" value="Female">Female
+											<input type="radio" name="gender" id="gender" value="Female">Female
 										</label>
 									</div>
 								</div>

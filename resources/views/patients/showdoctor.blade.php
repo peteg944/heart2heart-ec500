@@ -43,10 +43,22 @@
 			</div>
 		</div>
 					<div class="text-center">
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+						<a class="choosethisdoctor"  href="{{ url('/patient/choosedoctor/'.$selected->id) }}">
+							<button class="btn btn-primary" type="button"><span class="
+glyphicon glyphicon-envelope"></span>&nbsp;Choose This Doctor</button>
+=======
+>>>>>>> Stashed changes
 						<a href="{{ url('/patient/setdoctor/'.$selected->id) }}">
 							<button class="btn btn-primary" type="button">
                                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;Choose This Doctor
                             </button>
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 						</a>
 					</div>
 

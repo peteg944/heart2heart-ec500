@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests;
 use App\Repositories\PatientRepository;
 use App\Repositories\DoctorRepository;
-use App\User;
-use App\Doctor;
-use App\Patient;
+
 
 class PatientController extends Controller
 {
@@ -135,15 +133,22 @@ public function showdoctor(Request $request, $doctor_id)
         return redirect('patient');
     }
     
-    /*public searching*/
-    public function publicsearch(Request $request)
+    /* change the doctor of patient database*/
+    public function choosedoctor(Request $request, $doctor_id)
     {
-    	$data = array(
-    	'patients' => $this->patients->search1($request->user()->subuser),
-    	);
-        return view('public1.search', $data);
+            if($request->user()->subuser_type == "App\\Doctor")
+            return view('usertypeError', [
+                'correct_type' => 'patient',
+                ]);
+    	$patient_id = $request->user()->subuser->id;
+    	$patients = $this->patients->changedoctor($patient_id, $doctor_id);
+		$this_doctor = $this->patients->doctorID($doctor_id);
+		        $data = array(
+            'doctors' => $this->doctors->shortNames($request->user()->subuser),
+            'selected' => $this->doctors->doctorID($doctor_id),
+            );
+        return view('patients.showdoctor', $data);
     }
-
     
 }
 
