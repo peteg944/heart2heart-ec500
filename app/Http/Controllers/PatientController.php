@@ -113,25 +113,6 @@ public function showdoctor(Request $request, $doctor_id)
             );
         return view('patients.showdoctor', $data);
     }
-
-    /**
-     * Set this patient's doctor to this doctor
-     * @param int $doctor_id
-     * @return Response
-     */
-    public function setDoctor(Request $request, $doctor_id)
-    {
-        if($request->user()->subuser_type == "App\\Doctor")
-            return view('usertypeError', ['correct_type' => 'patient']);
-
-        // Set the new doctor ID
-        $this_patient = $request->user()->subuser;
-        $this_patient->doctor_id = $doctor_id;
-        $this_patient->save();
-
-        // Go back to patient
-        return redirect('patient');
-    }
     
     /* change the doctor of patient database*/
     public function choosedoctor(Request $request, $doctor_id)

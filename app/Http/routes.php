@@ -27,15 +27,7 @@ Route::get('doctor', 'DoctorController@index');
     //Route::get('doctor/addpatient', 'DoctorController@getStore');
     //Route::post('doctor/addpatient', 'DoctorController@postStore');
 
-<<<<<<< Updated upstream
-    Route::get('doctor/myprofile', 'DoctorController@myProfile');
-=======
-<<<<<<< HEAD
     Route::get('doctor/myprofile', 'DoctorController@myprofile');
-=======
-    Route::get('doctor/myprofile', 'DoctorController@myProfile');
->>>>>>> origin/master
->>>>>>> Stashed changes
 
 // Patients
 Route::get('patient', 'PatientController@index');
@@ -45,22 +37,10 @@ Route::get('patient', 'PatientController@index');
     Route::get('patient/contactus', function () {
         return view('patients/contact us');
     });
-<<<<<<< Updated upstream
-Route::get('patient/indexdoctor', 'PatientController@indexdoctor');
-Route::get('patient/getdoctor/{doctor}', 'PatientController@showdoctor');
-Route::get('patient/setdoctor/{doctor}', 'PatientController@setDoctor');
-=======
-<<<<<<< HEAD
+
 Route::get('indexdoctor', 'PatientController@indexdoctor');
 Route::get('patient/getdoctor/{doctor}', 'PatientController@show');
 Route::get('patient/choosedoctor/{doctor}', 'PatientController@choosedoctor');
-
-=======
-Route::get('patient/indexdoctor', 'PatientController@indexdoctor');
-Route::get('patient/getdoctor/{doctor}', 'PatientController@showdoctor');
-Route::get('patient/setdoctor/{doctor}', 'PatientController@setDoctor');
->>>>>>> origin/master
->>>>>>> Stashed changes
 
 // Managing dicom files
 Route::post('uploaddicom/{patient}', 'DicomController@upload');
