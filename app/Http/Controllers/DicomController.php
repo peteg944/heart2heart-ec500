@@ -85,11 +85,10 @@ class DicomController extends Controller
         $zip->close();
 
         // Run the python program
-        //exec('source ~/.bashrc');
-	chdir('../storage/app/python');
-	Log::info("Current dir: ".shell_exec('pwd'));
-        $output = shell_exec("/usr/bin/python $python_folder/segment.py 2>&1"); // execute
-	Log::info("Python output: $output");
+        // chdir('../storage/app/python');
+        // Log::info("Current dir: ".shell_exec('pwd'));
+        // $output = shell_exec("/usr/bin/python $python_folder/segment.py 2>&1"); // execute
+        // Log::info("Python output: $output");
 	
         // Now there should be an accuracy.csv file
         if(!file_exists($python_folder . '/accuracy.csv'))
@@ -130,14 +129,18 @@ class DicomController extends Controller
         // Create dicom object
         $created_dicom = $this->dicoms->create($ef_data, $this->patients->withID($patient_id));
 
-        // Delete files that are unnecessary
+        // Delete files,folders that are unnecessary
         $keep_files = array(
             '.gitignore',
             'segment.py',
-            'train.csv',
+            'accuracy.csv',
+        );
+        $keep_folders = array(
+            'train.csv'
         );
 
-        $files = Storage::allFiles(basename($python_folder));
+        // Deletes files
+        $files = Storage::files(basename($python_folder));
         //Log::info("Found # of files: ".count($files));
         foreach($files as $file)
         {
@@ -145,22 +148,22 @@ class DicomController extends Controller
 
             if(!in_array(basename($file), $keep_files))
             {
-                if(is_dir($file))
-                {
-                    Storage::deleteDirectory($file);
-                    //Log::info("Deleted folder: $file");
-                }
-                else
-                {
-                    Storage::delete($file);
-                    //Log::info("Deleted file: $file");
-                }
+                Storage::delete($file);
+                Log::info("Deleted file: $file");
+            }
+        }
+        // Deletes folders
+        $folders = Storage::directories(basename($python_folder));
+        foreach($folders as $folder)
+        {
+            if(!in_array(basename($folder), $keep_folders))
+            {
+                Storage::deleteDirectory($folder);
+                Log::info("Deleted folder: $folder");
             }
         }
 
-	shell_exec('rm -rf train output');
-	//shell_exec('rm accuracy.csv');
-	//shell_exec('rm *.zip');
+        // shell_exec('rm -rf train output');
 
         // return success
         return Response::json([
